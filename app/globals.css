@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.signin-container {
+  @apply flex justify-center items-center h-[100vh];
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.signin-box {
+  /* box-shadow: offset-x offset-y blue-radius spread-radius rgba(0, 0, 0, 0.1); */
+  @apply rounded-lg p-5 bg-white shadow-lg flex flex-col items-start;
 }
-
+.signin-box h1 {
+  @apply mb-5;
+}
+.signin-box input {
+  @apply p-2 rounded-md border border-gray-300;
+}
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-gradient-to-tr from-indigo-600 to-purple-700
+}
+.signin-box button {
+  @apply mt-4 bg-purple-600 text-white px-6 py-2 rounded-md;
 }
