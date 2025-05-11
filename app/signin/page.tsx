@@ -1,10 +1,47 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import { useState } from "react";
+import { config } from "../config";
+import  axios from "axios";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const router = useRouter();
+
+    const handleSignIn = async () => {
+        try {
+            const payload = {
+                username: username,
+                password: password
+            }
+
+            const response = await axios.post(`${config.apiUrl}/user/signin`, payload);
+
+            if (response.data.token !== null) {
+                localStorage.setItem('token', response.data.token);
+                router.push('/backoffice/dashboard');
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Check your credentials',
+                    text: 'Invalid username or password!',
+                    timer: 2000,
+                });
+            }
+        } catch (error) {
+            console.error("Error signing in:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            });
+        }
+    }
 
     return (
         <div className="signin-container">
@@ -17,12 +54,13 @@ export default function SignIn() {
                 onChange={(e) => setUsername(e.target.value)}/>
 
                 <div className="mt-4">Password</div>
-                <input type="text"
+                <input type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
 
-                <button className="mt-4">
+                <button className="mt-4" onClick={handleSignIn}>
                     Sign In
+                    <i className="fa fa-sign-in-alt ml-2"></i>
                 </button>
             </div>
         </div>

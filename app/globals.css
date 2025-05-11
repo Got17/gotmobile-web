@@ -12,12 +12,20 @@
 .signin-box h1 {
   @apply mb-5;
 }
-.signin-box input {
-  @apply p-2 rounded-md border border-gray-300;
+input {
+  @apply p-2 rounded-md border border-gray-300 w-full;
 }
 body {
   @apply bg-gradient-to-tr from-indigo-600 to-purple-700
 }
 .signin-box button {
   @apply mt-4 bg-purple-600 text-white px-6 py-2 rounded-md;
+}
+
+.btn {
+  @apply bg-purple-600 text-white px-6 py-2 rounded-md;
+}
+
+.content-header {
+  @apply text-2xl font-bold mb-4 pt-5 pb-3 border-b-2 border-purple-200 text-purple-600;
 }
